@@ -67,7 +67,6 @@ const WatchPage = ({ moviesList }) => {
           src={embedURL}
           title={`${title} player`}
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-          sandbox="allow-scripts allow-same-origin allow-forms"
           scrolling="no"
           allowFullScreen
           className="watch-player"
