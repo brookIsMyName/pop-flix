@@ -66,6 +66,7 @@ const SeriesWatchPage = () => {
             src={`https://vidsrc.sh/embed/tv/${id}/${selectedSeason}/${selectedEpisode}`}
             title={`${show.name} — Season ${selectedSeason}, Episode ${selectedEpisode}`}
             allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            sandbox="allow-scripts allow-same-origin allow-forms"
             allowFullScreen
             className="watch-player"
               />
