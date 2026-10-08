@@ -74,7 +74,7 @@ fetchCategory(`https://api.themoviedb.org/3/discover/tv?with_genres=10765&langua
   fetchCategory(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=1`, setPopularTv);
   fetchCategory(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`, setNewReleases);
   fetchCategory(`https://api.themoviedb.org/3/discover/movie?with_genres=28&language=en-US&page=1`, setActionMovies);
-  fetchCategory(`https://api.themoviedb.org/3/discover/movie?with_genres=3            <Link to="/Search">5&language=en-US&page=1`, setComedyMovies);
+  fetchCategory(`https://api.themoviedb.org/3/discover/movie?with_genres=35&language=en-US&page=1`, setComedyMovies);
   fetchCategory(`https://api.themoviedb.org/3/discover/movie?with_genres=18&language=en-US&page=1`, setDramaMovies);
   fetchCategory(`https://api.themoviedb.org/3/discover/movie?with_genres=27&language=en-US&page=1`, setHorrorMovies);
   fetchCategory(`https://api.themoviedb.org/3/discover/movie?with_genres=10749&language=en-US&page=1`, setRomanceMovies);
