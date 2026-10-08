@@ -10,6 +10,12 @@ const Search = () =>{
     const handleSearch = () => {
         navigate(`/Search?query=${encodeURIComponent(searchTerm)}`);
     };
+
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" && searchTerm.trim() !== "") {
+            handleSearch();
+        }
+    });
     return(
         <div className={`Search p-0 ${isSearchPage ? "Search--results" : ""}`}>
             <img src={`search1.png`} alt="Search-icon" className="h-[20px] w-[20px] mr-[10px]"/>
