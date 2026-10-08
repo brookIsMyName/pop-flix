@@ -274,3 +274,141 @@ input::placeholder{
 .para {
   margin: 0;
 }
+
+/* First-visit creator intro */
+.welcome-splash {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: grid;
+  overflow: hidden;
+  place-items: center;
+  color: #f7f1e6;
+  background:
+    radial-gradient(ellipse at 50% 44%, #59452b55 0%, transparent 42%),
+    radial-gradient(ellipse at 50% 110%, #8e54251c 0%, transparent 54%),
+    #090a0c;
+  animation: welcome-splash-appear 500ms ease-out both;
+}
+
+.welcome-splash::before,
+.welcome-splash::after {
+  position: absolute;
+  pointer-events: none;
+  content: "";
+}
+
+.welcome-splash::before {
+  inset: 22px;
+  border: 1px solid #e5c78a1c;
+  border-radius: 2px;
+}
+
+.welcome-splash::after {
+  top: 50%;
+  left: 50%;
+  width: min(70vw, 560px);
+  height: min(70vw, 560px);
+  border: 1px solid #e5c78a0d;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 100px #e6b75c0b, inset 0 0 100px #e6b75c08;
+}
+
+.welcome-splash-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  text-align: center;
+  animation: welcome-mark-appear 900ms cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.welcome-splash-kicker {
+  color: #c7b99d;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-indent: .3em;
+}
+
+.welcome-splash-content h1 {
+  margin: 15px 0 16px;
+  background: linear-gradient(135deg, #fff4d7 8%, #e7c77e 48%, #b98242 92%);
+  background-clip: text;
+  color: transparent;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(5rem, 19vw, 12rem);
+  font-weight: 400;
+  letter-spacing: -.075em;
+  line-height: .95;
+  text-indent: -.075em;
+  text-shadow: 0 12px 55px #e6b75c1c;
+}
+
+.welcome-splash-credit {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #e4d8c1;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .24em;
+  text-indent: .24em;
+}
+
+.welcome-splash-credit::before,
+.welcome-splash-credit::after {
+  width: clamp(22px, 5vw, 52px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d9b56f99);
+  content: "";
+}
+
+.welcome-splash-credit::after {
+  transform: scaleX(-1);
+}
+
+.welcome-splash-bottom {
+  position: absolute;
+  bottom: clamp(34px, 7vh, 68px);
+  z-index: 1;
+  color: #9b8b6f;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .45em;
+  text-indent: .45em;
+}
+
+.welcome-splash.is-exiting {
+  pointer-events: none;
+  animation: welcome-splash-disappear 650ms ease-in forwards;
+}
+
+@keyframes welcome-splash-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes welcome-mark-appear {
+  from { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes welcome-splash-disappear {
+  to { opacity: 0; visibility: hidden; }
+}
+
+@media (max-width: 480px) {
+  .welcome-splash::before { inset: 14px; }
+  .welcome-splash-kicker { font-size: 8px; letter-spacing: .22em; }
+  .welcome-splash-credit { font-size: 8px; letter-spacing: .18em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-splash { animation-duration: 1ms; }
+  .welcome-splash-content { animation-duration: 1ms; }
+  .welcome-splash.is-exiting { animation-duration: 1ms; }
+}

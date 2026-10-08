@@ -32,6 +32,14 @@ const RenderCarousel = ({ title, items, type }) => (
 );
 
 const App = () => {
+const [showIntro, setShowIntro] = useState(() => {
+  try {
+    return window.localStorage.getItem("popflix-intro-seen") !== "true";
+  } catch {
+    return true;
+  }
+});
+const [introIsExiting, setIntroIsExiting] = useState(false);
 const [trending, setTrending] = useState([]);
 const [topRated, setTopRated] = useState([]);
 const [popularTv, setPopularTv] = useState([]);
@@ -85,10 +93,45 @@ fetchCategory(`https://api.themoviedb.org/3/discover/tv?with_genres=10765&langua
   fetchCategory(`https://api.themoviedb.org/3/discover/movie?with_genres=16&with_original_language=ja&language=en-US&page=1`, setAnimeMovies);
 }, []);
 
+useEffect(() => {
+  if (!showIntro) return undefined;
+
+  try {
+    window.localStorage.setItem("popflix-intro-seen", "true");
+  } catch {
+    // The intro can still play when browser storage is unavailable.
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const exitTimer = window.setTimeout(() => setIntroIsExiting(true), prefersReducedMotion ? 100 : 1550);
+  const removeTimer = window.setTimeout(() => setShowIntro(false), prefersReducedMotion ? 250 : 2200);
+
+  return () => {
+    window.clearTimeout(exitTimer);
+    window.clearTimeout(removeTimer);
+  };
+}, [showIntro]);
+
  
 
   return (
-    <Router>
+    <>
+      {showIntro && (
+        <div
+          className={`welcome-splash${introIsExiting ? " is-exiting" : ""}`}
+          role="status"
+          aria-label="PopFlix, created by Biruk"
+        >
+          <div className="welcome-splash-content">
+            <span className="welcome-splash-kicker">AN INDEPENDENT PROJECT</span>
+            <h1>Biruk</h1>
+            <span className="welcome-splash-credit">CREATOR OF POPFLIX</span>
+          </div>
+          <span className="welcome-splash-bottom" aria-hidden="true">POPFLIX</span>
+        </div>
+      )}
+      <div inert={showIntro}>
+        <Router>
       <Routes>
         {/* Home Page Route */}
         <Route path="/" element={
@@ -147,7 +190,9 @@ fetchCategory(`https://api.themoviedb.org/3/discover/tv?with_genres=10765&langua
         <Route path="/Search" element={<SearchRoute />} />
 
       </Routes>
-    </Router>
+        </Router>
+      </div>
+    </>
   );
 };
 
