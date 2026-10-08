@@ -15,9 +15,11 @@ const NavbarMain = () => {
       
       <div className="w-full flex justify-between py-6 px-9 items-center">
         {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2" style={{textDecoration: "none", color: "white"}}>
         <div className="text-white text-2xl font-serif">
           PopFlix
         </div>
+        </Link>
 
         {/* Hamburger Icon (mobile only) */}
         <div className="md:hidden">
