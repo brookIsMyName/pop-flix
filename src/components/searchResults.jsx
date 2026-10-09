@@ -94,14 +94,15 @@ const RenderCarousel = ({ title, items, type }) => (
       );
 
   return (
-
+<>
+    <NavbarMain />
     <div className="search-results bg-black pt-25 min-h-screen">
-      <NavbarMain />
           
 <RenderCarousel title="Movies" items={moviesList} type="movie" />
 <RenderCarousel title="Tv Series" items={tvSeriesList} type="tv" />
           
         </div>
+  </>
       )}
 
 
